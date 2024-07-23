@@ -1,10 +1,11 @@
 
+
 import { useState } from 'react';
 import React from 'react';
 import AddTodo from '../AddTodo';
 import List from './List';
+import "./App.css";
 
-import "./App.css"
 let nextId = 3;
 const initialTodos = [
   { id: 0, title: 'Buy milk', done: true },
@@ -32,14 +33,21 @@ function App() {
     );
   }
 
-  function handleDeleteTodo(todoId) {
-    setTodos(
-      todos.filter((t) => t.id !== todoId)
-    );
+  function handleDeleteTodo(ids) {
+    if (Array.isArray(ids)) {
+      setTodos(
+        todos.filter((t) => !ids.includes(t.id))
+      );
+    } else {
+      setTodos(
+        todos.filter((t) => t.id !== ids)
+      );
+    }
   }
 
   return (
     <div className="container">
+      <h1>Todo List</h1>
       <AddTodo onAddTodo={handleAddTodo} />
       <List
         todos={todos}

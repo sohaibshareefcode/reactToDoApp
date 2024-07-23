@@ -1,11 +1,25 @@
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
 
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f5e9e800; 
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.507);
+    background-color: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
     border-radius: 10px;
+}
+
+h1 {
+    background-color: #eb0505c4;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 /* AddTodo styles */
@@ -18,10 +32,12 @@
 .add-todo-input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
     border-radius: 5px;
     margin-right: 10px;
     font-size: 14px;
+    background-color: #333;
+    color: #fff;
 }
 
 .add-todo-button {
@@ -29,24 +45,15 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color:  #0026ff8e; 
+    background-color:#15f157;
     color: white;
     font-size: 14px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .add-todo-button:hover {
-    background-color:   #1200b3; 
-}
-
-/* Header styles */
-h1 {
-    background-color: #0026ff8e; 
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    margin-bottom: 20px;
+    background-color:#15f157;
+    transform: scale(1.05);
 }
 
 /* List styles */
@@ -60,8 +67,8 @@ h1 {
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
-    background-color: #ffffff;
+    border-bottom: 1px solid #333;
+    background-color: #2a2a2a;
     margin-bottom: 10px;
     border-radius: 5px;
 }
@@ -84,16 +91,33 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #0026ff8e;
+    background-color:#15f157;
     color: white;
     font-size: 14px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .task-button:hover {
-    background-color: #1200b3;
+    background-color: #e3fc0a;
+    transform: scale(1.05);
 }
 
 input[type="checkbox"] {
     margin-right: 10px;
 }
+
+  .delete-selected {
+    background-color:  #f7ab09;
+    color: white;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .delete-selected:hover {
+    background-color: #39f709;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  

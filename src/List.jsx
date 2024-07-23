@@ -1,29 +1,61 @@
 
 
-
-
 import { useState } from 'react';
 import React from 'react';
 
-
 function List({ todos, onChangeTodo, onDeleteTodo }) {
+  const [selectedTodos, setSelectedTodos] = useState([]);
+
+  const handleSelectTodo = (todoId) => {
+    setSelectedTodos((prevSelectedTodos) =>
+      prevSelectedTodos.includes(todoId)
+        ? prevSelectedTodos.filter((id) => id !== todoId)
+        : [...prevSelectedTodos, todoId]
+    );
+  };
+
+  const handleDeleteSelected = () => {
+    onDeleteTodo(selectedTodos);
+    setSelectedTodos([]);
+  };
+
   return (
-    <ul className="todo-list">
-      {todos.map((todo) => (
-        <li key={todo.id} className="todo-item">
-          <Task
-            todo={todo}
-            onChange={onChangeTodo}
-            onDelete={onDeleteTodo}
-          />
-        </li>
-      ))}
-    </ul>
+    <div>
+      {selectedTodos.length > 0 && (
+        <button className="task-button delete-selected" onClick={handleDeleteSelected}>
+          Delete Selected
+        </button>
+      )}
+      <ul className="todo-list">
+        {todos.map((todo) => (
+          <li key={todo.id} className="todo-item">
+            <Task
+              todo={todo}
+              onChange={onChangeTodo}
+              onDelete={onDeleteTodo}
+              onSelect={handleSelectTodo}
+              isSelected={selectedTodos.includes(todo.id)}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
-function Task({ todo, onChange, onDelete }) {
+function Task({ todo, onChange, onDelete, onSelect, isSelected }) {
   const [isEditing, setIsEditing] = useState(false);
+
+  const handleTitleChange = (e) => {
+    onChange({
+      ...todo,
+      title: e.target.value,
+    });
+  };
+
+  const handleCheckboxChange = (e) => {
+    onSelect(todo.id);
+  };
 
   let todoContent;
   if (isEditing) {
@@ -31,12 +63,7 @@ function Task({ todo, onChange, onDelete }) {
       <>
         <input
           value={todo.title}
-          onChange={(e) => {
-            onChange({
-              ...todo,
-              title: e.target.value,
-            });
-          }}
+          onChange={handleTitleChange}
         />
         <button className="task-button" onClick={() => setIsEditing(false)}>
           Save
@@ -58,13 +85,8 @@ function Task({ todo, onChange, onDelete }) {
     <label className="task-label">
       <input
         type="checkbox"
-        checked={todo.done}
-        onChange={(e) => {
-          onChange({
-            ...todo,
-            done: e.target.checked,
-          });
-        }}
+        checked={isSelected}
+        onChange={handleCheckboxChange}
       />
       {todoContent}
       <button className="task-button" onClick={() => onDelete(todo.id)}>
@@ -75,4 +97,3 @@ function Task({ todo, onChange, onDelete }) {
 }
 
 export default List;
-
